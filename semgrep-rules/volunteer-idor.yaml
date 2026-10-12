@@ -1,0 +1,12 @@
+﻿rules:
+  - id: marine-volunteer-idor-unprotected-route
+    languages:
+      - javascript
+    severity: ERROR
+    message: >-
+      Volunteer record modification uses a direct route handler
+      without route-level authentication or ownership authorization.
+      Review controller and service ownership checks.
+    pattern-either:
+      - pattern: router.put('/:id', (req, res) => volunteerController.updateVolunteer(req, res))
+      - pattern: router.delete('/:id', (req, res) => volunteerController.deleteVolunteer(req, res))

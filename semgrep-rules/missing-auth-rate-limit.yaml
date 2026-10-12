@@ -1,0 +1,12 @@
+﻿rules:
+  - id: marine-auth-routes-missing-rate-limit
+    languages:
+      - javascript
+    severity: ERROR
+    message: >-
+      Authentication endpoint directly invokes its controller
+      without route-level rate-limiting middleware.
+      Check whether global protection exists separately.
+    pattern-either:
+      - pattern: router.post('/login', authController.login)
+      - pattern: router.post('/register', authController.register)

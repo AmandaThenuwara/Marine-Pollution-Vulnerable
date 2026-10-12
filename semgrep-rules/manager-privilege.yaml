@@ -1,0 +1,14 @@
+﻿rules:
+  - id: marine-public-registration-manager-privilege
+    languages:
+      - javascript
+    severity: ERROR
+    message: >-
+      Public registration assigns the privileged Cleanup_Task_Manager
+      role from user-controlled input. Verify that authorization
+      or administrative approval is enforced.
+    patterns:
+      - pattern: |
+          if (role === 'Cleanup_Task_Manager') {
+            userRole = 'Cleanup_Task_Manager';
+          }

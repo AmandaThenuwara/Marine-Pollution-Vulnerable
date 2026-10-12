@@ -1,0 +1,16 @@
+﻿rules:
+  - id: marine-task-route-missing-auth
+    languages:
+      - javascript
+    severity: ERROR
+    message: >-
+      Task modification/deletion route uses an inline handler without
+      route-level authentication or authorization middleware.
+      Verify whether the router is protected globally.
+    patterns:
+      - pattern-either:
+          - pattern: router.patch($PATH, (req, res) => $HANDLER(req, res))
+          - pattern: router.delete($PATH, (req, res) => $HANDLER(req, res))
+      - pattern-not-inside: |
+          router.use(authenticate);
+          ...

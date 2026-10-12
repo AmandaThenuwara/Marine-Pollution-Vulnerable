@@ -1,0 +1,13 @@
+﻿rules:
+  - id: marine-jwt-stale-authorization-claims
+    languages:
+      - javascript
+    severity: ERROR
+    message: >-
+      Authentication middleware directly trusts decoded JWT
+      claims as the current user without reloading account
+      status and permissions from the database.
+    pattern: |
+      const decoded = jwt.verify($TOKEN, $SECRET);
+      ...
+      req.user = decoded;
